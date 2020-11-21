@@ -1,0 +1,29 @@
+{
+  "name": "node-mongo-mvc-crud",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "express-async-errors": "^3.1.1",
+    "express-ejs-layouts": "^2.5.0",
+    "joi": "^13.1.0",
+    "joi-objectid": "^2.0.0",
+    "mongoose": "^5.10.14",
+    "winston": "^2.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
+}

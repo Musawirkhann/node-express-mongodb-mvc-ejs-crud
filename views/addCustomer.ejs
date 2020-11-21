@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="card-header">
+        <h4 class="font-weight-bold">Add New Customer</h4>
+    </div>
+    <div class="card-body">
+        <form action="/addCustomer" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="firstname">First Name</label>
+                        <input type="text" class="form-control" name="firstname" placeholder="enter first name" id="firstname">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="lastname">Last Name</label>
+                        <input type="text" class="form-control" name="lastname" placeholder="enter last name" id="lastname">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="phonenumber">Phone Number</label>
+                        <input type="number" class="form-control" name="phonenumber" placeholder="enter your phone number" id="phonenumber">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="cnic">CNIC</label>
+                        <input type="text" class="form-control" name="cnic" placeholder="22222-2222222-2" id="cnic">
+                    </div>
+                </div>
+                <div class="col-12">
+                    <div class="form-group">
+                        <label for="addres">Address</label>
+                        <textarea class="form-control" name="address" id="address" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="">
+                <button itype="submt" class="btn btn-success">Submit</button>
+                <a href="/" class="btn btn-light">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

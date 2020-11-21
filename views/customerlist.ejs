@@ -1,0 +1,43 @@
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-8">
+                <h4 class="font-weight-bold">All Customers</h4>
+            </div>
+            <div class="col-4">
+                <a href="/addCustomer" class="btn btn-success float-right"><i class="fa fa-plus mr-1"></i>Add New</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">CNIC</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(customers.length > 0) { %>
+                    <% for(let customer of customers) { %>
+                    <tr>
+                        <th scope="row"><%= customer.firstname %> <%= customer.lastname %></th>
+                        <td><%= customer.phonenumber %></td>
+                        <td><%= customer.cnic %></td>
+                        <td>
+                            <a href="/updateCustomer/<%= customer._id %>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                            <a href="/deleteCustomer/<%= customer._id %>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <td>No data found</td>
+                    </tr>
+                <% } %>
+            </tbody>
+            </table>
+    </div>
+</div>
