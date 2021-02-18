@@ -220,3 +220,9 @@
 {"level":"info","message":"MongoDb connected successfuly...","timestamp":"2020-11-16T12:43:25.663Z"}
 {"level":"info","message":"App is listening on url http://localhost:8080","timestamp":"2020-11-16T12:43:27.129Z"}
 {"level":"info","message":"MongoDb connected successfuly...","timestamp":"2020-11-16T12:43:27.152Z"}
+{"level":"info","message":"App is listening on url http://localhost:8080","timestamp":"2020-11-30T15:16:17.874Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2020-11-30T15:16:17.898Z"}
+{"level":"info","message":"App is listening on url http://localhost:8080","timestamp":"2020-12-09T06:29:06.574Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2020-12-09T06:29:06.620Z"}
+{"level":"info","message":"App is listening on url http://localhost:8080","timestamp":"2021-02-18T08:31:03.273Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-02-18T08:31:03.315Z"}
