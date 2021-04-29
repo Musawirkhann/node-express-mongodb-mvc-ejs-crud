@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 const config = require('./startup/config');
 const winston = require('winston');
 const err = require('./middleware/errors');
-const customerRoutes = require('./routes/customer-routes');
+const postRoutes = require('./routes/post-routes');
 const app = express();
 
 require('./startup/db')();
@@ -21,7 +21,7 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use(customerRoutes.routes);
+app.use(postRoutes.routes);
 app.use(err);
 
 

@@ -1,0 +1,45 @@
+<div class="card">
+    <div class="card-header">
+        <div class="row">
+            <div class="col-8">
+                <h4 class="font-weight-bold">All Posts</h4>
+            </div>
+            <div class="col-4">
+                <a href="/addPost" class="btn btn-success float-right"><i class="fa fa-plus mr-1"></i>Add New</a>
+            </div>
+        </div>
+    </div>
+    <div class="card-body">
+        <table class="table table-hover">
+            <thead  class="table-dark" style="margin-left: 50%;">
+                <tr>
+                    <th scope="col">Numero</th>
+                    <th scope="col">Type</th>
+                    <th scope="col">Laltitude</th>
+                    <th scope="col">Longitude</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(posts.length > 0) { %>
+                    <% for(let post of posts) { %>
+                    <tr>
+                        
+                        <th scope="row"><td><%= post.numero %><%= post.type %></td></th>
+                        
+                        <td><%= post.laltitude%></td>
+                        <td><%= post.longitude %></td>
+                        <td>
+                            <a href="/updatePost/<%= post._id %>" class="btn btn-sm btn-warning"><i class="fa fa-edit"></i></a>
+                            <a href="/deletePost/<%= post._id %>" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i></a>
+                        </td>
+                    </tr>
+                    <% } %>
+                <% } else { %>
+                    <tr>
+                        <td>No data found</td>
+                    </tr>
+                <% } %>
+            </tbody>
+            </table>
+    </div>
+</div>
