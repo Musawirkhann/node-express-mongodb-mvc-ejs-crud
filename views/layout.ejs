@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>map</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
@@ -16,6 +17,7 @@
     
   </head>
 <body>
+  
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
         <a class="navbar-brand" href="#"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,6 +30,11 @@
               <a class="nav-link" href="#">MAP
                 <span class="sr-only">(current)</span>
               </a>
+            </li>      
+            <li class="nav-item active">
+              <a class="nav-link" onclick="startDrawing()" href="#">ADD
+                <span class="sr-only">(current)</span>
+              </a>
             </li>        
           </ul>          
         </div>
@@ -35,29 +42,165 @@
 
       <div class="container"><%- body %></div>
       <div id="map" style="width: 1500px; height: 600px"></div>
+      
       <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-            <script>
-                    var map = L.map('map').setView([34.7398,  10.7600], 12);
-                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    }).addTo(map);
-                    //add leaflet-geoman controls with some options to the map  
-                      map.pm.addControls({  
-                      position: 'topleft',  
-                      drawRectangle:false,
-                      drawPolyline:false,
-                      drawPolygon:false,
-                      drawCircle:false,
-                      drawCircleMarker:true
-                        
-                      });
-            </script>          
+            <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+<div class="modal fade" id="pointadding" tabindex="-1" role="dialog" aria-labelledby="pointaddingLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="pointaddingLabel">New Entry</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form action="/addPost"  method="POST">
+        <div class="col-6">
+          <div class="form-group">
+              <label class="col-form-label" for="numero">numero</label>
+              <input type="number" class="form-control" name="numero"  placeholder="numero" id="numero">
+          </div>
+      </div>
+            <div class="col-6">
+              <div class="form-group">
+                  <label class="col-form-label" for="type">Type</label>
+                  <input type="text" class="form-control" name="type" placeholder="type" id="type">
+              </div>
+            </div>
+
+            <div class="col-6">
+              <div class="form-group"> 
+                
+                  <input type="text"  class="form-control" id="laltitude" name="laltitude" value=""> 
+              </div>
+            </div>
+         <h1>izzz sare9aa </h1>
+            <div class="col-6">
+              <div class="form-group"> 
+                
+                  <input type="text"  class="form-control" id="longitude" name="longitude"  class="value"> 
+              </div>
+            </div>
+
+            
+           
+         
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button itype="submt" class="btn btn-success">Submit</button>      </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script type="text/javascript" language="Javascript">
+
+  /*var map = L.map('map').setView([34.7398,  10.7600], 12);
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+  }).addTo(map);
+  /* //add leaflet-geoman controls with some options to the map  
+    map.pm.addControls({  
+    position: 'topleft',  
+    drawRectangle:false,
+    drawPolyline:false,
+    drawPolygon:false,
+    drawCircle:false,
+    drawCircleMarker:true
+    
+    });
+    */ 
+     var clickedCoord =[]  
+   
 
 
-      
 
+
+    var view =  new ol.View({
+      center:([1197816.006371,4138617.095339]),
+      zoom:12
+      })
+    
+  
+   // Basemap layer
+   var basemapLayer = new ol.layer.Tile({
+      source: new ol.source.Stamen({
+          layer:'terrain'
+      })
+    })
+    
+    var layerArray = [basemapLayer]
+
+  // Initiating Map
+  var map = new ol.Map({
+      target : 'map',
+      view :view,
+      layers:layerArray
+  })
+
+  //  1. To define a source
+  var drawSource = new ol.source.Vector()
+  // 2. To Define a style
+  // Skip it and let the OL use default styling
+  // 3. To Define a Layer
+  var drawLayer = new ol.layer.Vector({
+      source:drawSource
+  })
+  // 4. Adding on map
+  map.addLayer(drawLayer)
+
+
+  // Initiate a draw interaction
+  var draw = new ol.interaction.Draw({
+      type : 'Point',
+      source:drawSource
+  })
+  /*draw.on('drawstart', function(evt){
+      drawSource.clear()
+  })*/
+   longitude = document.getElementById('longitude');
+   latElem = document.getElementById('laltitude');
+  longitude.innerHTML = '1197816.006371'; 
+  latElem.innerHTML = '4138617.095339';
+  console.log(longitude);
+  console.log(latElem);
+  
+  draw.on('drawend',function(evt){
+      // alert('point is added')
+      clickedCoord = evt.feature.getGeometry().getFlatCoordinates() 
+      $('#pointadding').modal('show');
+      console.log('clicked at', evt.feature.getGeometry().getFlatCoordinates()    )
+      map.removeInteraction(draw)
+         // let lat = clickedCoord[0];
+          //let lng = clickedCoord[1];
+        console.log(clickedCoord[0]);
+        console.log(clickedCoord[1]);
+        // Update the values in the panel
+        longitude = clickedCoord[0];
+        latElem  = clickedCoord[1];
+
+
+  })
+  console.log(longitude);
+  console.log(latElem);
+
+  // Function that enables draw interaction
+
+  function startDrawing(){
+  // add interaction to the map
+  map.addInteraction(draw)
+  }
+  
+ 
+  </script>        
+             
+<script
+src="https://code.jquery.com/jquery-3.5.0.js"
+integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="
+crossorigin="anonymous"></script>
       <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-</body>
+ 
+
+    </body>
 </html>

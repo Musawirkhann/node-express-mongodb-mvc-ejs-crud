@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "nodemon ",
     "start": "nodemon index.js"
   },
   "engines": {
@@ -24,8 +25,9 @@
     "joi": "^13.7.0",
     "joi-objectid": "^2.0.0",
     "leaflet-draw": "^1.0.4",
+    "leaflet-toolbar": "*",
     "mongo": "^0.1.0",
-    "mongoose": "^5.12.3",
+    "mongoose": "^5.12.6",
     "winston": "^2.4.5"
   },
   "devDependencies": {

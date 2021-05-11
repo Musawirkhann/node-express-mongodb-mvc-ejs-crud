@@ -15,6 +15,7 @@ const addPost = async (req, res, next) => {
     const {error} = validate(req.body);
     if(error) return res.status(422).send(error.details[0].message);
     const data = req.body;
+   
     let post = await new Post({
         numero: data.numero,
         type: data.type,
@@ -22,7 +23,7 @@ const addPost = async (req, res, next) => {
         longitude: data.longitude
     });
     post = await post.save();
-    res.redirect('/');
+    //res.redirect('/');//
 }
 
 const getUpdatePostView = async (req, res, next) => {
