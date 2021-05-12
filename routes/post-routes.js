@@ -1,11 +1,12 @@
 const express = require('express');
 const {getAllPosts, getAddPostView, addPost,
-        getUpdatePostView, updatePost, getDeletePostView, deletePost} = require('../controllers/postController');
+        getUpdatePostView, updatePost, getDeletePostView, deletePost, getAllPostsdata} = require('../controllers/postController');
 
 
 const router = express.Router();
 
 router.get('/', getAllPosts);
+router.get('/getAllPosts', getAllPostsdata);
 router.get('/addPost', getAddPostView);
 router.post('/addPost', addPost);
 router.get('/updatePost/:id', getUpdatePostView);
