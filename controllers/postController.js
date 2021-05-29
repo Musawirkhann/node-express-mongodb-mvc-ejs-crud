@@ -1,3 +1,4 @@
+const { render } = require('ejs');
 const {Post, validate} = require('../models/post');
 
 const getAllPosts = async (req, res, next) => {
@@ -8,8 +9,11 @@ const getAllPosts = async (req, res, next) => {
 }
 
 const getAllPostsdata = async (req, res, next) => {
+  
     const list = await Post.find().exec();
     res.json(list);
+   
+
 }
 
 const getAddPostView = (req, res, next) => {

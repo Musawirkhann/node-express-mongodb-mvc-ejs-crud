@@ -27,12 +27,13 @@
         <div class="collapse navbar-collapse" id="navbarColor01">
           <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">MAP
+              <a class="nav-link" href="#">Map
                 <span class="sr-only">(current)</span>
               </a>
             </li>      
             <li class="nav-item active">
-              <a class="nav-link" onclick="startDrawing()" href="#">ADD
+          
+              <a class="nav-link" class="btn btn-success float-right" onclick="startDrawing()" href="#"> <i class="fa fa-plus mr-1"></i> Add New 
                 <span class="sr-only">(current)</span>
                 <select id="typepoint">
                   <option value="Post" style="background-color:rgb(247, 247, 158)">Post</option>
@@ -46,8 +47,18 @@
         </div>
       </nav>
 
+  
       <div class="container"><%- body %></div>
-      <div id="map" style="width: 1500px; height: 600px"></div>
+      <div id="map" style="width: 1500px; height: 600px">
+        <div id="popup" class="ol-popup">
+      
+        </div>
+          <a href="#" id="popup-closer" class="ol-popup-closer"></a>
+          <div id="popup-content">
+          
+          </div>
+      
+      </div>
       
       <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
@@ -116,12 +127,46 @@
     
     });
     */ 
+   var alldata =[];
+   var geojsonobj = {}
     $(window).on("load",function(){
-      jQuery.get("/getAllPosts",function(data){
-        console.log(data);
+
+      jQuery.get("/getAllPosts",function(data){  
+        for (var i = 0; i <= (data.length-1); ++i){
+        alldata.push(data[i]);}
+        console.log(alldata);
+            })
+        creatingGeojson(alldata);
+              
       })
-    })
-  
+          function creatingGeojson(arrayofdata){
+            geojsonobj['type'] = "FeatureCollection"
+            var features = []
+            for(i=0;i<arrayofdata.length;i++){
+                var featobj = {}
+                featobj['type'] = 'Feature'
+                featobj['properties'] = {'type' : arrayofdata[i].type,
+                                          'numero': arrayofdata[i].numero,
+                                           'laltitude': arrayofdata[i].laltitude,
+                                            'longitude':arrayofdata[i].longitude }
+                                     
+                featobj['geometry'] = JSON.parse(arrayofdata[i].laltitude,arrayofdata[i].longitude)
+                features.push(featobj)
+               
+            }
+            console.log(features)
+            geojsonobj['features'] = features
+
+            //  Define source to show this data
+            var dataSource = new ol.source.Vector({
+                features : (new ol.format.GeoJSON().readFeatures(geojsonobj))
+                         })
+            var dataLayer = new ol.layer.Vector ({
+              source:dataSource
+            })
+            map.addLayer(dataLayer)
+                    }
+       
     /*fetch('/', {
       headers : { 
         'Content-Type': 'application/json',
@@ -135,10 +180,11 @@
      
 
      var clickedCoord =[]  
+     var geojsonobj = {}
      var typeSelect = document.getElementById('typepoint');
-    var type = document.getElementById('type');
+      var type = document.getElementById('type');
 
-    var view =  new ol.View({
+      var view =  new ol.View({
       center:([1197816.006371,4138617.095339]),
       zoom:12
       })
@@ -153,106 +199,22 @@
     
     var layerArray = [basemapLayer]
 
-  // Initiating Map
-  var map = new ol.Map({
-      target : 'map',
-      view :view,
-      layers:layerArray
+
+    //  1. To define a source
+  var drawSource = new ol.source.Vector({
   })
-
-  //  1. To define a source
-  var drawSource = new ol.source.Vector()
   
-  // 2. To Define a style
-  // Skip it and let the OL use default styling
-  // 3. To Define a Layer
 
-  /*if (typeSelect.value == 'Post'){
-    var drawLayer = new ol.layer.Vector({
-      source:drawSource,
-      style: function(){
-        
-            return new ol.style.Style({
-                    image :new ol.style.Circle({
-                        fill: new ol.style.Fill({
-                            color:'yellow'
-                        }),
-                        radius:7
-                    })
-                })
-        
-  } });
-  map.addLayer(drawLayer);
-  } 
-   if (typeSelect.value === 'Market'  ){
-    var drawLayer = new ol.layer.Vector({
-      source:drawSource,
-      style: function(){
-        
-            return new ol.style.Style({
-                    image :new ol.style.Circle({
-                        fill: new ol.style.Fill({
-                            color:'red'
-                        }),
-                        radius:7
-                    })
-                })
-        
-  } });
-  map.addLayer(drawLayer);
-  }
-  //map.addLayer(drawLayer); */
-
-  var drawLayer = new ol.layer.Vector({
-      source:drawSource,
-      style: function(){
-        if (typeSelect.value == 'Post'){
-            return new ol.style.Style({
-                    image :new ol.style.Circle({
-                        fill: new ol.style.Fill({
-                            color:'yellow'
-                        }),
-                        radius:7
-                    })
-                })
-        } else if (typeSelect.value == 'Market'  ){
-            return new ol.style.Style({
-                image :new ol.style.Circle({
-                    fill: new ol.style.Fill({
-                        color:'red'
-                    }),
-                    
-                    radius:7
-                })
-            })
-           } else if (typeSelect.value == 'Ecole'  ){
-            return new ol.style.Style({
-                image :new ol.style.Circle({
-                    fill: new ol.style.Fill({
-                        color:'blue'
-                    }),
-                    radius:7
-                })
-            })
-          
-        } else {
-            return new ol.style.Style({
-                image :new ol.style.Circle({
-                    fill: new ol.style.Fill({
-                        color:'green'
-                    }),
-                    radius:7
-                })
-            }) 
-        }
-    }
-  }) 
-  // 4. Adding on map
-  map.addLayer(drawLayer);
- 
+  
+ // Initiating Map
+ var map = new ol.Map({
+  target : 'map',
+  view :view,
+  layers:layerArray
+})
 
 
-  var draw = new ol.interaction.Draw({
+var draw = new ol.interaction.Draw({
       type : 'Point',
       source:drawSource,
       style: function(){
@@ -266,6 +228,7 @@
                     })
                 })
         } else if (typeSelect.value == 'Market'  ){
+          
             return new ol.style.Style({
                 image :new ol.style.Circle({
                     fill: new ol.style.Fill({
@@ -275,7 +238,7 @@
                     radius:7
                 })
             })
-           } else if (typeSelect.value == 'Ecole'  ){
+           }  else if (typeSelect.value == 'Ecole'  ){
             return new ol.style.Style({
                 image :new ol.style.Circle({
                     fill: new ol.style.Fill({
@@ -298,11 +261,140 @@
     }
       
     })
+  /*var drawLayer = new ol.layer.Vector({
+      source:drawSource,
+      style: function(typeSelect){
+        if (typeSelect.value == 'Post'){
+            return new ol.style.Style({
+                    image :new ol.style.Circle({
+                        fill: new ol.style.Fill({
+                            color:'yellow'
+                        }),
+                        radius:7
+                    })
+                })
+        } else if (typeSelect.value == 'Market'  ){
+            return new ol.style.Style({
+                image :new ol.style.Circle({
+                    fill: new ol.style.Fill({
+                        color:'red'
+                    }),
+                    
+                    radius:7
+                })
+            })
+           } else if (typeSelect.value == 'Ecole'  ){
+            return new ol.style.Style({
+                image :new ol.style.Circle({
+                    fill: new ol.style.Fill({
+                        color:'blue'
+                    }),
+                    radius:7
+                })
+            })
+          
+        } else {
+            return new ol.style.Style({
+                image :new ol.style.Circle({
+                    fill: new ol.style.Fill({
+                        color:'green'
+                    }),
+                    radius:7
+                })
+            }) 
+        }
+      }
+ 
+  }) 
+    
+  // 4. Adding on map
+ map.addLayer(drawLayer);*/
+  // 2. To Define a style
+  // Skip it and let the OL use default styling
+  // 3. To Define a Layer
+
+  if (typeSelect.value == 'Post'){
+    var drawLayerPost = new ol.layer.Vector({
+      source:drawSource,
+      style: function(){
+
+            return new ol.style.Style({
+                    image :new ol.style.Circle({
+                        fill: new ol.style.Fill({
+                            color:'yellow'
+                        }),
+                        radius:7
+                    })
+                })
+        
+  } });
+
+  map.addLayer(drawLayerPost);
+  } 
+   if (typeSelect.value == 'Market'){
+    var drawLayerMarket = new ol.layer.Heatmap({
+      source:drawSource,
+      style: function(){
+        
+            return new ol.style.Style({
+                    image :new ol.style.Circle({
+                        fill: new ol.style.Fill({
+                            color:'red'
+                        }),
+                        radius:7
+                    })
+                })
+        
+
+  } });
+ 
+  map.addLayer(drawLayerMarket);
+
+  }
+  
+  if (typeSelect.value == 'Ecole'){
+    var drawLayerEcole = new ol.layer.Vector({
+      source:drawSource,
+      style: function(){
+        
+            return new ol.style.Style({
+                    image :new ol.style.Circle({
+                        fill: new ol.style.Fill({
+                            color:'blue'
+                        }),
+                        radius:7
+                    })
+                })
+        
+
+  } });
+ 
+  map.addLayer(drawLayerEcole);
+
+  }
 
   
+ 
+
+
+    
+    
+   
+    /*var popup = new ol.Overlay({
+    element: document.getElementById('popup'),
+    });
+    map.addOverlay(popup);
 
 
 
+
+/**
+ * Handle change event.
+ */
+ typeSelect.onchange = function () {
+  map.removeInteraction(draw);
+  addInteraction();
+};
 
   /*draw.on('drawstart', function(evt){
       drawSource.clear()
@@ -315,11 +407,13 @@
   //console.log(latElem);
   
   draw.on('drawend',function(evt){
+     
       // alert('point is added')
+      
       clickedCoord = evt.feature.getGeometry().getFlatCoordinates() 
       //$('#pointadding').modal('show');
       console.log('clicked at', evt.feature.getGeometry().getFlatCoordinates()    )
-       map.removeInteraction(draw)
+      /*map.removeInteraction(draw)*/
        //console.log(draw.type)
          // let lat = clickedCoord[0];
           //let lng = clickedCoord[1];
@@ -359,6 +453,7 @@
 
   function startDrawing(){
   // add interaction to the map
+    
   map.addInteraction(draw)
   }
   
@@ -372,6 +467,21 @@ crossorigin="anonymous"></script>
      
       <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
  
+<!-- Openlayers -->
+<link rel="stylesheet" href="https://openlayers.org/en/latest/css/ol.css" />
+<script type="text/javascript" src="https://openlayers.org/en/latest/build/ol.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign"></script>
 
+<!-- ol-ext -->
+<link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
+<script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
+<!-- Openlayers -->
+<link rel="stylesheet" href="https://openlayers.org/en/latest/css/ol.css" />
+<script type="text/javascript" src="https://openlayers.org/en/latest/build/ol.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign"></script>
+
+<!-- ol-ext -->
+<link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
+<script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
     </body>
 </html>
