@@ -111,80 +111,75 @@
   </div>
 </div>
 <script type="text/javascript" language="Javascript">
-
-  /*var map = L.map('map').setView([34.7398,  10.7600], 12);
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  }).addTo(map);
-  /* //add leaflet-geoman controls with some options to the map  
-    map.pm.addControls({  
-    position: 'topleft',  
-    drawRectangle:false,
-    drawPolyline:false,
-    drawPolygon:false,
-    drawCircle:false,
-    drawCircleMarker:true
-    
+// create map and add layers
+const map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM()
+        }),
+        
+      ],
+      view: new ol.View({
+      center:([1197816.006371,4138617.095339]),
+        zoom: 12
+      })
     });
-    */ 
-   var alldata =[];
-   var geojsonobj = {}
-    $(window).on("load",function(){
 
-      jQuery.get("/getAllPosts",function(data){  
-        for (var i = 0; i <= (data.length-1); ++i){
-        alldata.push(data[i]);}
-        console.log(alldata);
-            })
-        creatingGeojson(alldata);
-              
-      })
-          function creatingGeojson(arrayofdata){
-            geojsonobj['type'] = "FeatureCollection"
-            var features = []
-            for(i=0;i<arrayofdata.length;i++){
-                var featobj = {}
-                featobj['type'] = 'Feature'
-                featobj['properties'] = {'type' : arrayofdata[i].type,
-                                          'numero': arrayofdata[i].numero,
-                                           'laltitude': arrayofdata[i].laltitude,
-                                            'longitude':arrayofdata[i].longitude }
-                                     
-                featobj['geometry'] = JSON.parse(arrayofdata[i].laltitude,arrayofdata[i].longitude)
-                features.push(featobj)
-               
-            }
-            console.log(features)
-            geojsonobj['features'] = features
-
-            //  Define source to show this data
-            var dataSource = new ol.source.Vector({
-                features : (new ol.format.GeoJSON().readFeatures(geojsonobj))
-                         })
-            var dataLayer = new ol.layer.Vector ({
-              source:dataSource
-            })
-            map.addLayer(dataLayer)
-                    }
-       
-    /*fetch('/', {
-      headers : { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
+$(window).on("load",function(){
+    
+    jQuery.get("/getAllPosts",function(data){ 
+      const features = []; 
+      console.log(data);
+      var colorpoint;
+      for (i = 0; i < data.length; i++){
+      
+      console.log("hello",data[i]);
+      if (data[i].type == 'Post'){
+          features.push(new ol.Feature({
+        geometry: new ol.geom.Point([data[i].longitude, data[i].laltitude ])
+      }));
+      }
+      
+      console.log(features);
+      colorpoint=data[i].type;
+      }
+      const vectorSource = new ol.source.Vector({
+      features
+    });
+   if (colorpoint=="post"){
+       console.log("je suis post ")}
+       else{
+           console.log("je suis autre")
        }
-
+    const vectorLayer = new ol.layer.Vector({
+      source: vectorSource,
+      style: new ol.style.Style({
+        image: new ol.style.Circle({
+          radius: 15,
+          fill: new ol.style.Fill({color: 'yellow'})
+        })
       })
-      .then(response => response.json())
-      .then(data => mydata=data);
-      console.log(mydata);*/
+    });
+    map.addLayer(vectorLayer);
+  
+ 
+    
+      
+          })
      
+            
+    })
+   
+          
+       
+    
 
-     var clickedCoord =[]  
-     var geojsonobj = {}
+    
      var typeSelect = document.getElementById('typepoint');
       var type = document.getElementById('type');
 
-      var view =  new ol.View({
+     /* var view =  new ol.View({
       center:([1197816.006371,4138617.095339]),
       zoom:12
       })
@@ -212,7 +207,7 @@
   view :view,
   layers:layerArray
 })
-
+*/
 
 var draw = new ol.interaction.Draw({
       type : 'Point',
