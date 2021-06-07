@@ -14,7 +14,8 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css"/>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css"/>
     <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
-    
+    <link rel="stylesheet" href="https://maps-sdk.trimblemaps.com/v2/trimblemaps-2.3.1.css" />
+        <script src="https://maps-sdk.trimblemaps.com/v2/trimblemaps-2.3.1.js"></script>
   </head>
 <body>
   
@@ -35,8 +36,9 @@
           
               <a class="nav-link" class="btn btn-success float-right" onclick="startDrawing()" href="#"> <i class="fa fa-plus mr-1"></i> Add New 
                 <span class="sr-only">(current)</span>
-                <select id="typepoint">
-                  <option value="Post" style="background-color:rgb(247, 247, 158)">Post</option>
+                <select id="typepoint" onchange="getType()">
+                  <option   >--------</option>
+                  <option  value="Post"  style="background-color:rgb(247, 247, 158)">Post</option>
                   <option value="Market" style="background-color:rgb(245, 169, 150)">Market</option>
                   <option value="Ecole" style="background-color:rgb(170, 204, 243)">Ecole</option>
                   <option value="Pharmacie" style="background-color:rgb(158, 247, 166)">Pharmacie</option>
@@ -49,6 +51,18 @@
 
   
       <div class="container"><%- body %></div>
+    <form id = 'checkbox' name = 'checkbox'>
+      <input type='checkbox' name='CheckBoxMarqueur' id='CheckMarqueur1' onchange="filterMap(event)" value='Post'/>
+      <label for='Marqueur 1'> Post</label> 
+      <input type='checkbox' name='CheckBoxMarqueur' id='CheckMarqueur2'onchange="filterMap(event)" value='Market' />
+       <label for='Marqueur 2' >Market </label>
+       <input type='checkbox' name='CheckBoxMarqueur' id='CheckMarqueur3'onchange="filterMap(event)" value='Pharmacie' />
+       <label for='Marqueur 3' >Pharmacie </label>
+       <input type='checkbox' name='CheckBoxMarqueur' id='CheckMarqueur4'onchange="filterMap(event)" value='Ecole' />
+       <label for='Marqueur 4' >Ecole </label>
+           
+    </form>
+    <a href="" class="btn btn-sm btn-danger" ><i class="fa fa-trash" onclick='supprimer()'></i></a>
       <div id="map" style="width: 1500px; height: 600px">
         <div id="popup" class="ol-popup">
       
@@ -110,7 +124,15 @@
     </div>
   </div>
 </div>
+<div class="overlay-container"style="margin-top: -30% auto;width : 100%;background-color: rgb(243, 243, 243);padding: 1em;box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);border-radius: 5px;" >
+  <span id="btnClose" class="btnClose" style=" margin-top :-10%;float: right;font-size:16pt;cursor: pointer;color:rgb(228, 56, 13);">&times;</span>
+  <span class='overlay-text' id='a'></span>
+  <br><br>
+  <span class='overlay-text' id='b'></span>
+</div>
 <script type="text/javascript" language="Javascript">
+//supprimer point 
+
 // create map and add layers
 const map = new ol.Map({
       target: 'map',
@@ -126,20 +148,55 @@ const map = new ol.Map({
       })
     });
 var drawSource= new ol.source.Vector({})
+/*var elt = document.getElementById('caseACocher');
+        console.log(elt.checked)
+        console.log(elt.value)
+var eltv=elt.value;
+function addLayer(eltv) {
+    if (eltv == 'Post'){
+         drawLayerPost.setVisible(true)
+        drawLayerMarket.setVisible(false)
+        drawLayerEcole.setVisible(false)
+       
+    }
+
+}*/
+
+var marker = [];
+var nbMarker = [];
+var tabCoord;
+function boxclick(box, i)
+{
+	if (box.checked)
+	{
+		for (var a = 1; a <= nbMarker[i]; a++)
+		{
+			marker[i][a].setVisible(true);
+		}
+	} else
+	{
+		for (var a = 1; a <= nbMarker[i]; a++)
+		{
+			marker[i][a].setVisible(false); 
+		}
+	}
+};
+
 
 $(window).on("load",function(){
-    
+
+    // get all
     jQuery.get("/getAllPosts",function(data){ 
       const features = []; 
       console.log(data);
       var colorpoint;
       for (i = 0; i < data.length; i++){
             console.log("hello",data[i]);
-            if (data[i].type == 'Post'){
+            
                 features.push(new ol.Feature({
                      geometry: new ol.geom.Point([data[i].longitude, data[i].laltitude ])
                 }));
-            }
+            
             
             console.log(features);
             colorpoint=data[i].type;
@@ -168,10 +225,81 @@ $(window).on("load",function(){
     
       
    })
-     
             
 })
+//var typefilter=$(".CheckMarqueur:checked").val();
+//var typefilter = document.querySelector('.CheckMarqueur:checked').value;
+
+//var checkedValue = null; 
+//var checkedValue = document.getElementById('CheckMarqueur1:checked').value;
+
+  
+function filterMap(event){
+  //get post 
+  var mylayer; 
+  console.log(event)
+  
+     
+    jQuery.get("/getAllPosts",function(data){
+    var typefilter = event.target.defaultValue; 
+    
+    var colorfilter='red'
    
+    if (typefilter=='Post'){
+       colorfilter ='yellow' ;
+    }
+    else if (typefilter=='Market'){
+      colorfilter ='red' ;
+    }
+    else if (typefilter=='Pharmacie'){
+      colorfilter ='green' ;
+    }
+    else if (typefilter=='Ecole'){
+      colorfilter ='blue' ;
+    }
+      const features = []; 
+      for (i = 0; i < data.length; i++){
+            if (data[i].type == typefilter){
+                features.push(new ol.Feature({
+                     geometry: new ol.geom.Point([data[i].longitude, data[i].laltitude ]),
+                     name: data[i].numero,
+                    population: 4000,
+                    rainfall: 500
+
+                }));
+              
+                  }
+
+      }
+      
+      const vectorSource = new ol.source.Vector({
+      features 
+    });
+    const vectorLayer = new ol.layer.Vector({
+      source: vectorSource,
+      style: new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 15,
+            fill: new ol.style.Fill({color: colorfilter})
+          })
+      })
+     
+    });
+    
+    if ( event.target.checked) {
+      
+      map.addLayer(vectorLayer);    
+  
+    } else {
+        
+        map.removeLayer(vectorLayer);
+        vectorLayer.setVisible(false);
+    }
+         
+  })
+  
+  
+}
  var typeSelect = document.getElementById('typepoint');
  var type = document.getElementById('type');
 var draw = new ol.interaction.Draw({
@@ -224,64 +352,113 @@ var draw = new ol.interaction.Draw({
           }
       
     })
-  
-  if (typeSelect.value == 'Post'){
-    var drawLayerPost = new ol.layer.Vector({
-      source:drawSource,
-      style: function(){
-            return new ol.style.Style({
-                    image :new ol.style.Circle({
-                        fill: new ol.style.Fill({
-                            color:'yellow'
-                        }),
-                        radius:7
-                    })
-                })  
-     } 
-    });
-    map.addLayer(drawLayerPost);
-    } 
-   if (typeSelect.value == 'Market'){
-    var drawLayerMarket = new ol.layer.Heatmap({
-      source:drawSource,
-        style: function(){
-          
-              return new ol.style.Style({
-                      image :new ol.style.Circle({
-                          fill: new ol.style.Fill({
-                              color:'red'
-                          }),
-                          radius:7
-                      })
-                  })
-      } 
-     });
-  map.addLayer(drawLayerMarket);
-  }
-  if (typeSelect.value == 'Ecole'){
-    var drawLayerEcole = new ol.layer.Vector({
-      source:drawSource,
-      style: function(){
-        
-            return new ol.style.Style({
-                    image :new ol.style.Circle({
-                        fill: new ol.style.Fill({
-                            color:'blue'
-                        }),
-                        radius:7
-                    })
-                })       
-     } 
-    });
- 
-  map.addLayer(drawLayerEcole);
+    
+ function getType(){
 
+  var x = document.getElementById("typepoint").value;
+  console.log("typepoint",x);
+  if (x == 'Post'){
+    
+    colordraw ='green' ;
+    console.log('mycolor is green')
+ }
+  else if (x == 'Market'){
+   colordraw ='red' ;
+   console.log('mycolor is red');
+ }
+ var drawLayerPost = new ol.layer.Vector({
+   source:drawSource,
+   style: function(){
+         return new ol.style.Style({
+                 image :new ol.style.Circle({
+                     fill: new ol.style.Fill({
+                         color:colordraw
+                     }),
+                     radius:7
+                 })
+             })  
+  } 
+ });
+ map.addLayer(drawLayerPost);
+ 
   }
+  //vector Feature popup Logic
+  const overlayContainerElement=document.querySelector('.overlay-container');
+     const overlayLayer=new ol.Overlay({
+       element:overlayContainerElement
+     })
+     map.addOverlay(overlayLayer);
+     const overlayerA= document.getElementById('a');
+     const overlayerB= document.getElementById('b');
+     map.on ('click',function(e){
+       overlayLayer.setPosition(undefined);
+     map.forEachFeatureAtPixel(e.pixel,function(feature,layer){
+      overlayContainerElement.style.display ='block';
+       console.log(feature);
+       let c= e.coordinate
+       let a=e.coordinate[0];
+       let b=e.coordinate[1];
+       console.log(a,b);
+       overlayLayer.setPosition(c);
+       overlayerA.innerHTML= a;
+       overlayerA.innerHTML= b;
+     })
+   }) 
+   var btnClose = document.getElementById('btnClose');
+   btnClose.addEventListener('click',closeModal);
+   function closeModal() {
+    overlayContainerElement.style.display ='none';
+    }     
+
+
+
+
+  /*let popup;
+                // Listen for clicks on the truck stops layer
+                map.on('click', function (evt) {
+                    const popupLocation = evt.features[0].geometry.coordinates.slice([1197816.006371,4138617.095339]);
+                    const popupContent = `Name: <br />
+                        ID: <br />
+                        Set: `;
+
+                    popup = new ol.Popup()
+                        .setLngLat(popupLocation)
+                        .setHTML(popupContent)
+                        .addTo(map);
+                });*/
    
    /*var popup = new ol.Overlay({
     element: document.getElementById('popup'),
     });
-    map.addOverlay(popup);*/
+    map.addOverlay(popup);
+    map.on('click', function(evt) {
+    var prettyCoord = ol.coordinate.toStringHDMS(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'), 2);
+    popup.show(evt.coordinate, '<div><h2>Coordinates</h2><p>' + prettyCoord + '</p></div>');
+});*/
+
+
+   /* map.on('singleclick', function(evt) {
+    popup.hide();
+    popup.setOffset([0, 0]);
+
+    // Attempt to find a feature in one of the visible vector layers
+    var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+    return feature;
+    });
+    if (feature) {
+        var coord = feature.getGeometry().getCoordinates();
+        var props = feature.getProperties();
+        var info =  "<input type='button' id='popup' value='Get here ?' />" ;
+        // Offset the popup so it points at the middle of the marker n
+        popup.setOffset([0, -22]);
+          popup.show(coord, info);
+          }   
+        });
+        $(document).on("click", "#popup", function(){
+        alert(nearest_feature(my_position)); 
+       });*/
+
+
 
    longitude = document.getElementById('longitude');
    latElem = document.getElementById('laltitude');
@@ -361,5 +538,6 @@ crossorigin="anonymous"></script>
 <!-- ol-ext -->
 <link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
 <script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
-    </body>
+<!--<script src="ol-popup.js"></script>-->   
+</body>
 </html>
