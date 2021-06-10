@@ -2570,3 +2570,62 @@
 {"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:10:36.214Z"}
 {"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:10:53.948Z"}
 {"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:10:53.987Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:22:06.026Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:22:06.050Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:22:08.039Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:22:08.063Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:23:07.809Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:23:07.834Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:23:39.771Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:23:39.797Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:23:47.463Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:23:47.503Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:23:49.494Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:23:49.524Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:23:52.047Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:23:52.069Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:23:53.872Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:23:53.904Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:24:01.588Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:24:01.614Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:24:04.094Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:24:04.117Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:24:11.451Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:24:11.481Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:24:14.533Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:24:14.568Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:24:16.869Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:24:16.895Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:24:39.289Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:24:39.314Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:24:56.623Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:24:56.643Z"}
+{"message":"Failed to lookup view \"layout\" in views directory \"C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\views\"","stack":"Error: Failed to lookup view \"layout\" in views directory \"C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\views\"\n    at Function.render (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express\\lib\\application.js:580:17)\n    at ServerResponse.render (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express\\lib\\response.js:1012:7)\n    at C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express-ejs-layouts\\lib\\express-layouts.js:113:20\n    at tryHandleCache (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\ejs\\lib\\ejs.js:278:5)\n    at View.exports.renderFile [as engine] (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\ejs\\lib\\ejs.js:489:10)\n    at View.render (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express\\lib\\view.js:135:8)\n    at tryRender (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express\\lib\\application.js:640:10)\n    at Function.render (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express\\lib\\application.js:592:3)\n    at ServerResponse.render (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express\\lib\\response.js:1012:7)\n    at ServerResponse.res.render (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express-ejs-layouts\\lib\\express-layouts.js:77:18)\n    at getmap (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\controllers\\postController.js:21:9)\n    at Layer.handle [as handle_request] (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at next (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express\\lib\\router\\route.js:137:13)\n    at Route.dispatch (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express\\lib\\router\\route.js:112:3)\n    at Layer.handle [as handle_request] (C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express\\lib\\router\\layer.js:95:5)\n    at C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\node_modules\\express\\lib\\router\\index.js:281:22","view":{"defaultEngine":"ejs","ext":".ejs","name":"layout","root":"C:\\Users\\Utilisateur\\React Projects\\node-express-mongodb-mvc-ejs-crud\\views"},"level":"error","timestamp":"2021-06-10T21:25:03.640Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:25:43.871Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:25:43.896Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:25:51.854Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:25:51.884Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:26:04.388Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:26:04.411Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:26:12.920Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:26:12.943Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:26:16.643Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:26:16.669Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:26:35.975Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:26:35.995Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:26:38.739Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:26:38.762Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:30:16.159Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:30:16.222Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:33:27.493Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:33:27.524Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:33:55.970Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:33:55.993Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:33:59.579Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:33:59.614Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:34:26.473Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:34:26.492Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:35:34.493Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:35:34.511Z"}
+{"level":"info","message":"App is listening on url http://localhost:8088","timestamp":"2021-06-10T21:35:58.712Z"}
+{"level":"info","message":"MongoDb connected successfuly...","timestamp":"2021-06-10T21:35:58.731Z"}

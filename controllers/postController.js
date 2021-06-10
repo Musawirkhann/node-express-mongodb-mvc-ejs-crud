@@ -8,7 +8,6 @@ const getAllPosts = async (req, res, next) => {
     });
 }
 
-
 const getAllPostsdata = async (req, res, next) => {
   
     const list = await Post.find().exec();
