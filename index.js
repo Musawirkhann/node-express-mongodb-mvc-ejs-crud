@@ -14,16 +14,13 @@ require('./startup/logging')();
 require('./startup/validations')();
 
 app.use(expressLayoutes);
+app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'ejs');
-
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-
 app.use(postRoutes.routes);
 app.use(err);
-
-
 app.listen(config.port, () => winston.info('App is listening on url http://localhost:' + config.port));
 
