@@ -8,12 +8,18 @@ const getAllPosts = async (req, res, next) => {
     });
 }
 
+
 const getAllPostsdata = async (req, res, next) => {
   
     const list = await Post.find().exec();
     res.json(list);
-   
+}
 
+const getmap = (req, res, next) => {
+    res.render('map');  
+}
+const getdashboard = (req, res, next) => {
+    res.render('dashboard');
 }
 
 const getAddPostView = (req, res, next) => {
@@ -96,5 +102,7 @@ module.exports = {
     getUpdatePostView,
     updatePost,
     getDeletePostView,
-    deletePost
+    deletePost,
+    getmap,
+    getdashboard
 }

@@ -6,6 +6,10 @@
     <title>map</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
     <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="/css/owl.theme.css">
+    <link rel="stylesheet" type="text/css" href="/css/owl.transitions.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
     <link rel="stylesheet" href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css" />
@@ -17,53 +21,349 @@
     <link rel="stylesheet" href="https://maps-sdk.trimblemaps.com/v2/trimblemaps-2.3.1.css" />
         <script src="https://maps-sdk.trimblemaps.com/v2/trimblemaps-2.3.1.js"></script>
   </head>
+  <header>
+    <%- include('header'); %>
+  
+</header>
+ 
 <body>
-  
-    <nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-3">
-        <a class="navbar-brand" href="#"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        
-        <div class="collapse navbar-collapse" id="navbarColor01">
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="#">Map
-                <span class="sr-only">(current)</span>
-              </a>
-            </li>      
-            <li class="nav-item active">
-          
-              <a class="nav-link" class="btn btn-success float-right" onclick="startDrawing()" href="#"> <i class="fa fa-plus mr-1"></i> Add New 
-                <span class="sr-only">(current)</span>
-                <select id="typepoint" onchange="getType()">
-                  <option   >--------</option>
-                  <option  value="Post"  style="background-color:rgb(247, 247, 158)">Post</option>
-                  <option value="Market" style="background-color:rgb(245, 169, 150)">Market</option>
-                  <option value="Ecole" style="background-color:rgb(170, 204, 243)">Ecole</option>
-                  <option value="Pharmacie" style="background-color:rgb(158, 247, 166)">Pharmacie</option>
-                </select>
-              </a>
-            </li>        
-          </ul>          
-        </div>
-      </nav>
+  <div class="collapse" id="searcharea">
+    <!-- top search -->
+    <div class="input-group">
+        <input type="text" class="form-control" placeholder="Search for...">
+        <span class="input-group-btn">
+          <button class="btn btn-primary" type="button">Search</button>
+      </span>
+    </div>
+  </div>
+    <!-- /.top search -->
+    <div class="top-bar">
+      <div class="container">
+          <div class="row">
+              <div class="col-md-6 top-message">
+                  <p>Welcome to SfaxCity</p>
+              </div>
+              <div class="col-md-6 top-links">
+                  <ul class="listnone">
+                      <li><a href="faq.html"> Help </a></li>
+                      <li><a href="pricing-plan.html">Pricing</a></li>
+                      <li><a href="signup-couple.html" class=" ">I m user</a></li>
+                      <li><a href="signup-vendor.html">Are you admin?</a></li>
+                      <li><a href="login-page.html">Log in</a></li>
+                      <li>
+                          <a role="button" data-toggle="collapse" href="#searcharea" aria-expanded="false" aria-controls="searcharea"> <i class="fa fa-search"></i> </a>
+                      </li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
 
-  
-      <div class="container"><%- body %></div>
-    <form id = 'checkbox' name = 'checkbox'>
-      <input type='checkbox' name='CheckBoxMarqueur' id='CheckMarqueur1' onchange="filterMap(event)" value='Post'/>
-      <label for='Marqueur 1'> Post</label> 
-      <input type='checkbox' name='CheckBoxMarqueur' id='CheckMarqueur2'onchange="filterMap(event)" value='Market' />
-       <label for='Marqueur 2' >Market </label>
-       <input type='checkbox' name='CheckBoxMarqueur' id='CheckMarqueur3'onchange="filterMap(event)" value='Pharmacie' />
-       <label for='Marqueur 3' >Pharmacie </label>
-       <input type='checkbox' name='CheckBoxMarqueur' id='CheckMarqueur4'onchange="filterMap(event)" value='Ecole' />
-       <label for='Marqueur 4' >Ecole </label>
-           
-    </form>
-    <a href="" class="btn btn-sm btn-danger" ><i class="fa fa-trash" onclick='supprimer()'></i></a>
-      <div id="map" style="width: 1500px; height: 600px">
+<div class="slider-bg">
+  <!-- slider start-->
+  <div id="slider" class="owl-carousel owl-theme slider">
+      <div class="item"><img src="images/sfax.jpg"></div>
+      <div class="item"><img src="images/hero-image-2.jpg" alt="Wedding couple just married"></div>
+      <div class="item"><img src="images/hero-image.jpg" alt="Wedding couple just married"></div>
+  </div>
+  <div class="find-section">
+      <!-- Find search section-->
+      <div class="container">
+          <div class="row">
+              <div class="col-md-offset-1 col-md-10 finder-block">
+                  <div class="finder-caption">
+                      <h1>We will help you to find all </h1>
+                      <p><strong>Find great places , hotels , restourants , Markets, shops... </strong> </p>
+                  </div>
+                  <div class="finderform">
+                      <form>
+                          <div class="row">
+                              <div class="form-group col-md-4">
+                                  <select class="form-control">
+                                      <option>Select Vendor Category</option>
+                                      <option value="Venue">Venue</option>
+                                      <option value="Photographer">Photographer</option>
+                                      <option value="Cake">Cake</option>
+                                      <option value="Dj">Dj</option>
+                                      <option value="Florist">Florist</option>
+                                      <option value="Videography">Videography</option>
+                                      <option value="jewellery">Jewellery</option>
+                                      <option value="Gifts">Gifts</option>
+                                      <option value="Dresses">Dresses</option>
+                                  </select>
+                              </div>
+                              <div class="form-group col-md-4">
+                                  <select class="form-control">
+                                      <option>Select City</option>
+                                      <option value="Ahmedabad">Ahmedabad</option>
+                                      <option value="Gandhinagar">Gandhinagar</option>
+                                      <option value="Rajkot">Rajkot</option>
+                                      <option value="Surat">Surat</option>
+                                      <option value="Vadodara">Vadodara</option>
+                                  </select>
+                              </div>
+                              <div class="form-group col-md-4">
+                                  <button type="submit" class="btn btn-primary btn-lg btn-block">Find Vendors</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+  <!-- /.Find search section-->
+</div>
+    <!-- slider end-->
+    <div class="section-space80">
+      <!-- Feature Blog Start -->
+      <div class="container">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="section-title mb60 text-center">
+                      <h1>Your Wedding Planing Start Here</h1>
+                      <p>Various versions have evolved over the years sometimes by accident sometimes on purpose.</p>
+                  </div>
+              </div>
+          </div>
+          <div class="row">
+              <!-- feature center -->
+              <div class="col-md-4">
+                  <div class="feature-block feature-center">
+                      <!-- feature block -->
+                      <div class="feature-icon"><img src="images/vendor.svg" alt=""></div>
+                      <h2>Find Shops & Markets</h2>
+                      <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.</p>
+                  </div>
+              </div>
+              <!-- /.feature block -->
+              <div class="col-md-4">
+                  <div class="feature-block feature-center">
+                      <!-- feature block -->
+                      <div class="feature-icon"><img src="images/mail.svg" alt=""></div>
+                      <h2>Contact Post Office</h2>
+                      <p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+                  </div>
+              </div>
+              <!-- /.feature block -->
+              <div class="col-md-4">
+                  <div class="feature-block feature-center">
+                      <!-- feature block -->
+                      <div class="feature-icon"><img src="images/library.png" style="width:22%;"alt=""></div>
+                      <h2>Find Schools</h2>
+                      <p>The generated Lorem Ipsum is therefore always free from repetition injected humour or non-characteristic words etc.</p>
+                  </div>
+              </div>
+              <!-- /.feature block -->
+          </div>
+          <!-- /.feature center -->
+      </div>
+  </div>
+  <div class="section-space80 bg-light">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="section-title mb60 text-center">
+                    <h1>Featured Wedding Vendor</h1>
+                    <p>Many desktop publishing packages and web page editors now use orem psum as their default model text.</p>
+                </div>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col-md-4">
+                <!-- vendor box start-->
+                <div class="vendor-box">
+                    <div class="vendor-image">
+                        <!-- vendor pic -->
+                        <a href="#"><img src="images/vendor-1.jpg" alt="wedding vendor" class="img-responsive"></a>
+                        <div class="feature-label"></div>
+                        <div class="favourite-bg"><a href="#" class=""><i class="fa fa-heart"></i></a></div>
+                    </div>
+                    <!-- /.vendor pic -->
+                    <div class="vendor-detail">
+                        <!-- vendor details -->
+                        <div class="caption">
+                            <!-- caption -->
+                            <h2><a href="#" class="title">Venue Vendor Title</a></h2>
+                            <p class="location"><i class="fa fa-map-marker"></i> Street Address, Name of Town, 12345, Country.</p>
+                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <span class="rating-count">(2)</span> </div>
+                        </div>
+                        <!-- /.caption -->
+                        <div class="vendor-price">
+                            <div class="price">$190 - $600</div>
+                        </div>
+                    </div>
+                    <!-- vendor details -->
+                </div>
+            </div>
+            <!-- /.vendor box start-->
+            <div class="col-md-4">
+                <!-- vendor box start-->
+                <div class="vendor-box">
+                    <div class="vendor-image">
+                        <!-- vendor pic -->
+                        <a href="#"><img src="images/vendor-4.jpg" alt="wedding vendor" class="img-responsive"></a>
+                        <div class="rated-label"></div>
+                        <div class="favourite-bg"><a href="#" class=""><i class="fa fa-heart"></i></a></div>
+                    </div>
+                    <!-- /.vendor pic -->
+                    <div class="vendor-detail">
+                        <!-- vendor details -->
+                        <div class="caption">
+                            <!-- caption -->
+                            <h2><a href="#" class="title"> Wedding Dress Vendor Title</a></h2>
+                            <p class="location"><i class="fa fa-map-marker"></i> Street Address, Name of Town, 12345, Country.</p>
+                            <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <span class="rating-count">(3)</span> </div>
+                        </div>
+                        <!-- /.caption -->
+                        <div class="vendor-price">
+                            <div class="price">$290 - $600</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- vendor details -->
+            </div>
+            <!-- /.vendor box start-->
+            <div class="col-md-4 vendor-box">
+                <!-- vendor box start-->
+                <div class="vendor-image">
+                    <!-- vendor pic -->
+                    <a href="#"><img src="images/vendor-3.jpg" alt="wedding vendor" class="img-responsive"></a>
+                    <div class="popular-label"></div>
+                    <div class="favourite-bg"><a href="#" class=""><i class="fa fa-heart"></i></a></div>
+                </div>
+                <!-- /.vendor pic -->
+                <div class="vendor-detail">
+                    <!-- vendor details -->
+                    <div class="caption">
+                        <!-- caption -->
+                        <h2><a href="#" class="title">Vendor Photographer Title</a></h2>
+                        <p class="location"><i class="fa fa-map-marker"></i> Street Address, Name of Town, 12345, Country.</p>
+                        <div class="rating"> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-o"></i> <span class="rating-count">(5)</span> </div>
+                    </div>
+                    <!-- /.caption -->
+                    <div class="vendor-price">
+                        <div class="price">$390 - $600</div>
+                    </div>
+                </div>
+                <!-- vendor details -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="section-space80">
+  <!-- top location -->
+  <div class="container">
+      <div class="row">
+          <div class="col-md-12">
+              <div class="section-title mb60 text-center">
+                  <h1>Top Wedding Locations</h1>
+                  <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text.</p>
+              </div>
+          </div>
+      </div>
+      <div class="row">
+          <div class="col-md-4 location-block">
+              <!-- location block -->
+              <div class="vendor-image">
+                  <a href="#"><img src="images/location-pic.jpg" alt="" class="img-responsive"></a> <a href="#" class="venue-lable"><span class="label label-default">New York City</span></a> </div>
+          </div>
+          <!-- /.location block -->
+          <div class="col-md-4 location-block">
+              <!-- location block -->
+              <div class="vendor-image">
+                  <a href="#"><img src="images/location-pic-2.jpg" alt="" class="img-responsive"></a> <a href="#" class="venue-lable"><span class="label label-default">Sydney</span></a> </div>
+          </div>
+          <!-- /.location block -->
+          <div class="col-md-4 location-block">
+              <!-- location block -->
+              <div class="vendor-image">
+                  <a href="#"><img src="images/location-pic-3.jpg" alt="" class="img-responsive"></a> <a href="#" class="venue-lable"><span class="label label-default">Russia</span></a> </div>
+          </div>
+          <!-- /.location block -->
+          <div class="col-md-8 location-block">
+              <!-- location block -->
+              <div class="vendor-image">
+                  <a href="#"><img src="images/location-pic-4.jpg" alt="" class="img-responsive"></a> <a href="#" class="venue-lable"><span class="label label-default">Germany</span></a> </div>
+          </div>
+          <!-- /.location block -->
+          <div class="col-md-4 location-block">
+              <!-- location block -->
+              <div class="vendor-image">
+                  <a href="#"><img src="images/location-pic-5.jpg" alt="" class="img-responsive"></a> <a href="#" class="venue-lable"><span class="label label-default">Paris</span></a> </div>
+          </div>
+          <!-- /.location block -->
+      </div>
+  </div>
+</div>
+<!-- /. Testimonial Section -->
+<div class="section-space80">
+  <!-- Call to action -->
+  <div class="container">
+      <div class="row">
+          <div class="col-md-6 couple-block">
+              <div class="couple-icon"><img src="images/couple.svg" alt=""></div>
+              <h2>Are you couple find the venue ?</h2>
+              <p>Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).</p>
+              <a href="#" class="btn btn-primary">Find Vendor</a> </div>
+          <div class="col-md-6 vendor-block">
+              <div class="vendor-icon"><img src="images/vendor.svg" alt=""></div>
+              <h2>Are you wedding vender ?</h2>
+              <p>Fusce eget elementum quam, vel tempor justo. Ut imperdiet eget sapien dictum aliquam. Nulla maximus sodales dignissim.</p>
+              <a href="#" class="btn btn-primary">Add Your Listing</a></div>
+      </div>
+  </div>
+</div>
+<!-- /. Call to action -->
+<div class="footer">
+  <!-- Footer -->
+  <div class="container">
+      <div class="row">
+          <div class="col-md-5 ft-aboutus">
+              <h2>Wedding.Vendor</h2>
+              <p>At Wedding Vendor our purpose is to help people find great online network connecting wedding suppliers and wedding couples who use those suppliers. <a href="#">Start Find Vendor!</a></p>
+              <a href="#" class="btn btn-default">Find a Vendor</a> </div>
+          <div class="col-md-3 ft-link">
+              <h2>Useful links</h2>
+              <ul>
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Contact us</a></li>
+                  <li><a href="#">News</a></li>
+                  <li><a href="#">Career</a></li>
+                  <li><a href="#">Privacy Policy</a></li>
+                  <li><a href="#">Terms of Use</a></li>
+              </ul>
+          </div>
+          <div class="col-md-4 newsletter">
+              <h2>Subscribe for Newsletter</h2>
+              <form>
+                  <div class="input-group">
+                      <input type="text" class="form-control" placeholder="Enter E-Mail Address" required>
+                      <span class="input-group-btn">
+      <button class="btn btn-default" type="button">Submit</button>
+      </span> </div>
+                  <!-- /input-group -->
+                  <!-- /.col-lg-6 -->
+              </form>
+              <div class="social-icon">
+                  <h2>Be Social &amp; Stay Connected</h2>
+                  <ul>
+                      <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+                      <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+                      <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+                      <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                      <li><a href="#"><i class="fa fa-flickr"></i></a></li>
+                  </ul>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+   
+    <!--<a href="" class="btn btn-sm btn-danger" ><i class="fa fa-trash" onclick='supprimer()'></i></a>-->
+      <!--<div id="map" style="width: 1500px; height: 600px">
         <div id="popup" class="ol-popup">
       
         </div>
@@ -72,12 +372,12 @@
           
           </div>
       
-      </div>
+      </div>-->
       
       <script src="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.min.js"></script>
             <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
             <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
-<div class="modal fade" id="pointadding" tabindex="-1" role="dialog" aria-labelledby="pointaddingLabel" aria-hidden="true">
+<!--<div class="modal fade" id="pointadding" tabindex="-1" role="dialog" aria-labelledby="pointaddingLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -123,7 +423,7 @@
       </form>
     </div>
   </div>
-</div>
+</div>-->
 <div class="overlay-container"style="margin-top: -30% auto;width : 100%;background-color: rgb(243, 243, 243);padding: 1em;box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);border-radius: 5px;" >
   <span id="btnClose" class="btnClose" style=" margin-top :-10%;float: right;font-size:16pt;cursor: pointer;color:rgb(228, 56, 13);">&times;</span>
   <span class='overlay-text' id='a'></span>
@@ -161,27 +461,6 @@ function addLayer(eltv) {
     }
 
 }*/
-
-var marker = [];
-var nbMarker = [];
-var tabCoord;
-function boxclick(box, i)
-{
-	if (box.checked)
-	{
-		for (var a = 1; a <= nbMarker[i]; a++)
-		{
-			marker[i][a].setVisible(true);
-		}
-	} else
-	{
-		for (var a = 1; a <= nbMarker[i]; a++)
-		{
-			marker[i][a].setVisible(false); 
-		}
-	}
-};
-
 
 $(window).on("load",function(){
 
@@ -500,11 +779,7 @@ var draw = new ol.interaction.Draw({
         fetch('/addPost', requestOptions)
         .then(response => response.json());
 
-       
-        
-
-        
-
+      
   })
   
   // Function that enables draw interaction
@@ -540,4 +815,6 @@ crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
 <!--<script src="ol-popup.js"></script>-->   
 </body>
+
+
 </html>
