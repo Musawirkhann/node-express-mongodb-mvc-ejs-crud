@@ -4,8 +4,8 @@ const {getAllPosts, getAddPostView, addPost,
 
 
 const router = express.Router();
-router.get('/', getAllPosts);
-router.get('/getAllPosts', getAllPostsdata);
+router.get('/dashboard', getAllPosts);
+router.get('/getAllPosts1', getAllPostsdata);
 router.get('/addPost', getAddPostView);
 router.post('/addPost', addPost);
 router.get('/map', getmap);

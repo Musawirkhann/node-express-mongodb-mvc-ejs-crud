@@ -4,7 +4,8 @@ const {Post, validate} = require('../models/post');
 const getAllPosts = async (req, res, next) => {
     const list = await Post.find().exec();
     res.render('postlist', {
-        posts: list
+        posts: list,
+        layout: 'dashboard.ejs'
     });
 }
 
@@ -15,10 +16,10 @@ const getAllPostsdata = async (req, res, next) => {
 }
 
 const getmap = (req, res, next) => {
-    res.render('map');  
+    res.render('map', {layout: 'map.ejs'});
 }
 const getdashboard = (req, res, next) => {
-    res.render('dashboard');
+    res.render('dashboard', {layout: 'dashboard.ejs'});
 }
 
 const getAddPostView = (req, res, next) => {

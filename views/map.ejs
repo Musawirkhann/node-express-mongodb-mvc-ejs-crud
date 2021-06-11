@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <title>Wedding Vendor | Find The Best Wedding Vendors</title>
     <!-- Bootstrap -->
@@ -12,11 +13,40 @@
     <!-- Template style.css -->
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <link rel="stylesheet" type="text/css" href="css/jquery-ui.css">
-    <!-- Font used in template -->
-    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,400italic,500,500italic,700,700italic,300italic,300' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" type="text/css" href="/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/css/owl.carousel.css">
+    <link rel="stylesheet" type="text/css" href="/css/owl.theme.css">
+    <link rel="stylesheet" type="text/css" href="/css/owl.transitions.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.pm@latest/dist/leaflet.pm.css" />
+    <link rel="stylesheet" href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.css" />
+	  <link rel="stylesheet" href="https://leaflet.github.io/Leaflet.markercluster/dist/MarkerCluster.Default.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.3.0/dist/MarkerCluster.Default.css"/>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.0/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.3.0/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://maps-sdk.trimblemaps.com/v2/trimblemaps-2.3.1.css" />
+        <script src="https://maps-sdk.trimblemaps.com/v2/trimblemaps-2.3.1.js"></script>
+        <!-- Openlayers -->
+<link rel="stylesheet" href="https://openlayers.org/en/latest/css/ol.css" />
+<script type="text/javascript" src="https://openlayers.org/en/latest/build/ol.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign"></script>
+
+<!-- ol-ext -->
+<link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
+<script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
+<!-- Openlayers -->
+<link rel="stylesheet" href="https://openlayers.org/en/latest/css/ol.css" />
+<script type="text/javascript" src="https://openlayers.org/en/latest/build/ol.js"></script>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=requestAnimationFrame,Element.prototype.classList,URL,Object.assign"></script>
+
+<!-- ol-ext -->
+<link rel="stylesheet" href="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.css" />
+<script type="text/javascript" src="https://cdn.rawgit.com/Viglino/ol-ext/master/dist/ol-ext.min.js"></script>
     <!--font awesome icon -->
-    <link rel="stylesheet" href="../../../maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    
     <!-- favicon icon -->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -27,6 +57,9 @@
     <![endif]-->
     
 </head>
+<header>
+    <%- include('header'); %>
+</header>
 
 <body>
    
@@ -62,6 +95,19 @@
                 <div class="col-md-12">
                     <h4>Refine Your Search</h4>
                 </div>
+                <li class="nav-item active">
+          
+                    <a class="nav-link" class="btn btn-success float-right" onclick="startDrawing()" href="#"> <i class="fa fa-plus mr-1"></i> Add New 
+                      <span class="sr-only">(current)</span>
+                      <select id="typepoint" onchange="getType()">
+                        <option> -------- </option>
+                        <option  value="Post"  style="background-color:rgb(247, 247, 158)">Post</option>
+                        <option value="Market" style="background-color:rgb(245, 169, 150)">Market</option>
+                        <option value="Ecole" style="background-color:rgb(170, 204, 243)">Ecole</option>
+                        <option value="Pharmacie" style="background-color:rgb(158, 247, 166)">Pharmacie</option>
+                      </select>
+                    </a>
+                  </li>
                 <form id = 'checkbox' name = 'checkbox'>
                     <input type='checkbox' name='CheckBoxMarqueur' id='CheckMarqueur1' onchange="filterMap(event)" value='Post'/>
                     <label for='Marqueur 1'> Post</label> 
@@ -422,108 +468,376 @@
             </div>
         </div>
     </div>
-    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="js/jquery.min.js"></script>
-    <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Flex Nav Script -->
-    <script src="js/jquery.flexnav.js" type="text/javascript"></script>
-    <script src="js/navigation.js"></script>
-    <script src="js/jquery.sticky.js"></script>
-    <script src="js/header-sticky.js"></script>
-    <script src="../../../code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-    <script type="text/javascript" src="js/price-slider.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?callback=initMap"></script>
+    <div class="overlay-container"style="margin-top: -30% auto;width : 100%;background-color: rgb(243, 243, 243);padding: 1em;box-shadow: 0 15px 20px rgba(0, 0, 0, 0.3);border-radius: 5px;" >
+        <span id="btnClose" class="btnClose" style=" margin-top :-10%;float: right;font-size:16pt;cursor: pointer;color:rgb(228, 56, 13);">&times;</span>
+        <span class='overlay-text' id='a'></span>
+        <br><br>
+        <span class='overlay-text' id='b'></span>
+      </div>
     
-    <script>
-    // The following example creates complex markers to indicate beaches near
-
-    // to the base of the flagpole.
-
-    function initMap() {
-        var map = new google.maps.Map(document.getElementById('googleMap'), {
-            zoom: 12,
-            scrollwheel: false,
-            center: {
-                lat: 23.0314489,
-                lng: 72.5788925
-            }
-        });
-
-        setMarkers(map);
-    }
-
-    // Data for the markers consisting of a name, a LatLng and a zIndex for the
-    // order in which these markers should display on top of each other.
-    var beaches = [
-
-        ['Florist Vendor', 23.0676033, 72.5735364, 4, 'florist.png'],
-        ['Dresses Vendor', 23.0676413, 72.560375, 5, 'dress.png'],
-        ['Venue Vendor', 23.0683954, 72.5306521, 3, 'venue.png'],
-        ['Venue Vendor', 23.0715393, 72.5849452, 2, 'venue.png'],
-        ['Dresses Vendor', 23.0206091, 72.5026789, 1, 'dress.png'],
-        ['Photography Vendor', 23.0358085, 72.6200942, 1, 'photography.png'],
-        ['Videography Vendor', 22.9748713, 72.5891307, 1, 'videography.png'],
-        ['Favour & gift Vendor', 23.1125045, 72.5641729, 1, 'favour-gift.png'],
-        ['Music Vendor', 23.1125045, 72.5641729, 1, 'music.png'],
-        ['Jwellery Vendor', 23.0384031, 72.5267135, 1, 'jwellery.png'],
-        ['Cake Vendor', 23.0028003, 72.5399962, 1, 'cake.png']
-    ];
-
-    function setMarkers(map) {
-        // Adds markers to the map.
-
-        // Marker sizes are expressed as a Size of X,Y where the origin of the image
-        // (0,0) is located in the top left of the image.
-
-        // Origins, anchor positions and coordinates of the marker increase in the X
-        // direction to the right and in the Y direction down.
-
-        // Shapes define the clickable region of the icon. The type defines an HTML
-        // <area> element 'poly' which traces out a polygon as a series of X,Y points.
-        // The final coordinate closes the poly by connecting to the first coordinate.
-        var shape = {
-            coords: [1, 1, 1, 20, 18, 20, 18, 1],
-            type: 'poly'
-        };
-        for (var i = 0; i < beaches.length; i++) {
-            var beach = beaches[i];
-            var image = {
-                url: 'images/' + beach[4],
-
-                // This marker is 20 pixels wide by 32 pixels high.
-                size: new google.maps.Size(32, 49),
-                // The origin for this image is (0, 0).
-                origin: new google.maps.Point(0, 0),
-                // The anchor for this image is the base of the flagpole at (0, 32).
-                anchor: new google.maps.Point(0, 49)
-            };
-            var marker = new google.maps.Marker({
-                position: {
-                    lat: beach[1],
-                    lng: beach[2]
-                },
-                map: map,
-                icon: image,
-                shape: shape,
-                title: beach[0],
-                zIndex: beach[3]
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="crossorigin="anonymous"></script>
+    <script type="text/javascript" language="Javascript">
+        // create map and add layers
+        const map = new ol.Map({
+              target: 'map',
+              layers: [
+                new ol.layer.Tile({
+                  source: new ol.source.OSM()
+                }),
+                
+              ],
+              view: new ol.View({
+              center:([1197816.006371,4138617.095339]),
+                zoom: 12
+              })
             });
-            var content = "Vendor: " + beach[0];
-            var infowindow = new google.maps.InfoWindow()
-            google.maps.event.addListener(marker, 'mouseover', (function(marker, content, infowindow) {
-                return function() {
-                    infowindow.setContent(content);
-                    infowindow.open(map, marker);
-                };
-            })(marker, content, infowindow));
-
-
+        var drawSource= new ol.source.Vector({})
+        /*var elt = document.getElementById('caseACocher');
+                console.log(elt.checked)
+                console.log(elt.value)
+        var eltv=elt.value;
+        function addLayer(eltv) {
+            if (eltv == 'Post'){
+                 drawLayerPost.setVisible(true)
+                drawLayerMarket.setVisible(false)
+                drawLayerEcole.setVisible(false)
+               
+            }
+        
+        }*/
+        
+        $(window).on("load",function(){
+        
+            // get all
+            jQuery.get("/getAllPosts",function(data){ 
+              const features = []; 
+              console.log(data);
+              var colorpoint;
+              for (i = 0; i < data.length; i++){
+                    console.log("hello",data[i]);
+                    
+                        features.push(new ol.Feature({
+                             geometry: new ol.geom.Point([data[i].longitude, data[i].laltitude ])
+                        }));
+                    
+                    
+                    console.log(features);
+                    colorpoint=data[i].type;
+              }
+              const vectorSource = new ol.source.Vector({
+              features
+            });
+             if (colorpoint=="post"){
+               console.log("je suis post ")
+              }
+              else{
+                   console.log("je suis autre")
+               }
+            const vectorLayer = new ol.layer.Vector({
+              source: vectorSource,
+              style: new ol.style.Style({
+                  image: new ol.style.Circle({
+                    radius: 15,
+                    fill: new ol.style.Fill({color: 'yellow'})
+                  })
+              })
+            });
+            map.addLayer(vectorLayer);
+          
+         
+            
+              
+           })
+                    
+        })
+        //var typefilter=$(".CheckMarqueur:checked").val();
+        //var typefilter = document.querySelector('.CheckMarqueur:checked').value;
+        
+        //var checkedValue = null; 
+        //var checkedValue = document.getElementById('CheckMarqueur1:checked').value;
+        
+          
+        function filterMap(event){
+          //get post 
+          var mylayer; 
+          console.log(event)
+          
+             
+            jQuery.get("/getAllPosts",function(data){
+            var typefilter = event.target.defaultValue; 
+            
+            var colorfilter='red'
+           
+            if (typefilter=='Post'){
+               colorfilter ='yellow' ;
+            }
+            else if (typefilter=='Market'){
+              colorfilter ='red' ;
+            }
+            else if (typefilter=='Pharmacie'){
+              colorfilter ='green' ;
+            }
+            else if (typefilter=='Ecole'){
+              colorfilter ='blue' ;
+            }
+              const features = []; 
+              for (i = 0; i < data.length; i++){
+                    if (data[i].type == typefilter){
+                        features.push(new ol.Feature({
+                             geometry: new ol.geom.Point([data[i].longitude, data[i].laltitude ]),
+                             name: data[i].numero,
+                            population: 4000,
+                            rainfall: 500
+        
+                        }));
+                      
+                          }
+        
+              }
+              
+              const vectorSource = new ol.source.Vector({
+              features 
+            });
+            const vectorLayer = new ol.layer.Vector({
+              source: vectorSource,
+              style: new ol.style.Style({
+                  image: new ol.style.Circle({
+                    radius: 15,
+                    fill: new ol.style.Fill({color: colorfilter})
+                  })
+              })
+             
+            });
+            
+            if ( event.target.checked) {
+              
+              map.addLayer(vectorLayer);    
+          
+            } else {
+                
+                map.removeLayer(vectorLayer);
+                vectorLayer.setVisible(false);
+            }
+                 
+          })
+          
+          
         }
-    }
-    </script>
+         var typeSelect = document.getElementById('typepoint');
+         var type = document.getElementById('type');
+        var draw = new ol.interaction.Draw({
+                    type : 'Point',
+                    source:drawSource,
+                    style: function(){
+                          if (typeSelect.value == 'Post'){
+                              return new ol.style.Style({
+                                      image :new ol.style.Circle({
+                                          fill: new ol.style.Fill({
+                                              color:'yellow'
+                                          }),
+                                          radius:7
+                                      })
+                                  })
+                          } 
+                      else if (typeSelect.value == 'Market'  ){
+                        
+                          return new ol.style.Style({
+                              image :new ol.style.Circle({
+                                  fill: new ol.style.Fill({
+                                      color:'red'
+                                  }),
+                                  
+                                  radius:7
+                              })
+                          })
+                        }  
+                        else if (typeSelect.value == 'Ecole'  ){
+                          return new ol.style.Style({
+                              image :new ol.style.Circle({
+                                  fill: new ol.style.Fill({
+                                      color:'blue'
+                                  }),
+                                  radius:7
+                              })
+                          })
+                        
+                      } 
+                      else {
+                          return new ol.style.Style({
+                              image :new ol.style.Circle({
+                                  fill: new ol.style.Fill({
+                                      color:'green'
+                                  }),
+                                  radius:7
+                              })
+                          }) 
+                      }
+                  }
+              
+            })
+            
+         function getType(){
+        
+          var x = document.getElementById("typepoint").value;
+          console.log("typepoint",x);
+          if (x == 'Post'){
+            
+            colordraw ='green' ;
+            console.log('mycolor is green')
+         }
+          else if (x == 'Market'){
+           colordraw ='red' ;
+           console.log('mycolor is red');
+         }
+         var drawLayerPost = new ol.layer.Vector({
+           source:drawSource,
+           style: function(){
+                 return new ol.style.Style({
+                         image :new ol.style.Circle({
+                             fill: new ol.style.Fill({
+                                 color:colordraw
+                             }),
+                             radius:7
+                         })
+                     })  
+          } 
+         });
+         map.addLayer(drawLayerPost);
+         
+          }
+          //vector Feature popup Logic
+          const overlayContainerElement=document.querySelector('.overlay-container');
+             const overlayLayer=new ol.Overlay({
+               element:overlayContainerElement
+             })
+             map.addOverlay(overlayLayer);
+             const overlayerA= document.getElementById('a');
+             const overlayerB= document.getElementById('b');
+             map.on ('click',function(e){
+               overlayLayer.setPosition(undefined);
+             map.forEachFeatureAtPixel(e.pixel,function(feature,layer){
+              overlayContainerElement.style.display ='block';
+               console.log(feature);
+               let c= e.coordinate
+               let a=e.coordinate[0];
+               let b=e.coordinate[1];
+               console.log(a,b);
+               overlayLayer.setPosition(c);
+               overlayerA.innerHTML= a;
+               overlayerA.innerHTML= b;
+             })
+           }) 
+           var btnClose = document.getElementById('btnClose');
+           btnClose.addEventListener('click',closeModal);
+           function closeModal() {
+            overlayContainerElement.style.display ='none';
+            }     
+        
+        
+        
+        
+          /*let popup;
+                        // Listen for clicks on the truck stops layer
+                        map.on('click', function (evt) {
+                            const popupLocation = evt.features[0].geometry.coordinates.slice([1197816.006371,4138617.095339]);
+                            const popupContent = `Name: <br />
+                                ID: <br />
+                                Set: `;
+        
+                            popup = new ol.Popup()
+                                .setLngLat(popupLocation)
+                                .setHTML(popupContent)
+                                .addTo(map);
+                        });*/
+           
+           /*var popup = new ol.Overlay({
+            element: document.getElementById('popup'),
+            });
+            map.addOverlay(popup);
+            map.on('click', function(evt) {
+            var prettyCoord = ol.coordinate.toStringHDMS(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'), 2);
+            popup.show(evt.coordinate, '<div><h2>Coordinates</h2><p>' + prettyCoord + '</p></div>');
+        });*/
+        
+        
+           /* map.on('singleclick', function(evt) {
+            popup.hide();
+            popup.setOffset([0, 0]);
+        
+            // Attempt to find a feature in one of the visible vector layers
+            var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+            return feature;
+            });
+            if (feature) {
+                var coord = feature.getGeometry().getCoordinates();
+                var props = feature.getProperties();
+                var info =  "<input type='button' id='popup' value='Get here ?' />" ;
+                // Offset the popup so it points at the middle of the marker n
+                popup.setOffset([0, -22]);
+                  popup.show(coord, info);
+                  }   
+                });
+                $(document).on("click", "#popup", function(){
+                alert(nearest_feature(my_position)); 
+               });*/
+        
+        
+        
+           longitude = document.getElementById('longitude');
+           latElem = document.getElementById('laltitude');
+           longitude.value = '1197816.006371'; 
+           latElem.value = '4138617.095339';
+          //console.log(longitude);
+          //console.log(latElem);
+          
+          draw.on('drawend',function(evt){
+             
+              // alert('point is added')
+              clickedCoord = evt.feature.getGeometry().getFlatCoordinates() 
+              //$('#pointadding').modal('show');
+              console.log('clicked at', evt.feature.getGeometry().getFlatCoordinates()    )
+              /*map.removeInteraction(draw)*/
+               //console.log(draw.type)
+                 // let lat = clickedCoord[0];
+                  //let lng = clickedCoord[1];
+                console.log(clickedCoord[0]);
+                console.log(clickedCoord[1]);
+                // Update the values in the panel
+               
+                longitude.value = clickedCoord[0];
+                latElem.value = clickedCoord[1];
+                type.value=typeSelect.value;
+                //console.log(type.value);
+                
+                const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({  numero:5,
+                           type:typeSelect.value,
+                           laltitude: clickedCoord[1].toString(),
+                           longitude:  clickedCoord[0].toString()
+                          
+                          })
+                };
+                console.log(requestOptions.body);
+                fetch('/addPost', requestOptions)
+                .then(response => response.json());
+        
+              
+          })
+          
+          // Function that enables draw interaction
+          function startDrawing(){
+          // add interaction to the map
+            map.addInteraction(draw)
+           }
+          
+          </script> 
+          <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+          <script src="https://code.jquery.com/jquery-3.5.0.js"integrity="sha256-r/AaFHrszJtwpe+tHyNi/XCfMxYpbsRg2Uqn0x3s2zc="crossorigin="anonymous"></script>
 </body>
 
 
-<!-- Mirrored from jituchauhan.com/wedding/wedding-new/vendor-listing-top-map.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 07 Jun 2021 22:33:21 GMT -->
+
 </html>
