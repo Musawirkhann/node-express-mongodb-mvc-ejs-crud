@@ -1,0 +1,40 @@
+<div class="card">
+    <div class="card-header">
+        <h4 class="font-weight-bold">Update Post</h4>
+    </div>
+    <div class="card-body">
+        <form action="/updatePost/<%= post._id %>" method="post">
+            <div class="row">
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="numero">Numero</label>
+                        <input type="number" class="form-control" value="<%=post.numero %>" name="numero" placeholder="numero" id="numero">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="type">Type</label>
+                        <input type="text" class="form-control" value="<%= post.type %>" name="type" placeholder="type" id="type">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="laltitude">laltitude</label>
+                        <input type="text" class="form-control" value="<%= post.laltitude %>" name="laltitude" placeholder="laltitude" id="laltitude">
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="form-group">
+                        <label class="col-form-label" for="longitude">Longitude</label>
+                        <input type="text" class="form-control" value="<%= post.longitude %>" name="longitude" placeholder="longitude" id="longitude">
+                    </div>
+                </div>
+                
+            </div>
+            <div class="">
+                <button type="submit" class="btn btn-success">Update</button>
+                <a href="/" class="btn btn-light">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>

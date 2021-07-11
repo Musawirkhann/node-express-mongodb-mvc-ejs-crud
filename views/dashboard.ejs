@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Mirrored from jituchauhan.com/wedding/wedding-new/dashboard-vendor.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 07 Jun 2021 22:34:35 GMT -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Wedding Vendor | Find The Best Wedding Vendors</title>
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Template style.css -->
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link rel="stylesheet" type="text/css" href="css/flaticon.html">
+    <!-- Font used in template -->
+    <link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Istok+Web:400,400italic,700,700italic' rel='stylesheet' type='text/css'>
+    <!--font awesome icon -->
+    <link rel="stylesheet" href="../../../maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <!-- favicon icon -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+  
+
+    <div class="tp-dashboard-head">
+        <!-- page header -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 profile-header">
+                    <div class="profile-pic col-md-2"><img src="images/profile-dashbaord.png" alt=""></div>
+                    <div class="profile-info col-md-9">
+                        <h1 class="profile-title">Vendor Name<small>Welcome Back memeber</small></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.page header -->
+    <div class="tp-dashboard-nav">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 dashboard-nav">
+                    <ul class="nav nav-pills nav-justified">
+                        <li class="active"><a href=""><i class="fa fa-dashboard db-icon"></i>My Dashboard</a></li>
+                        <li><a href=""><i class="fa fa-user db-icon"></i>My Profile</a></li>
+                        <li><a href=""><i class="fa fa-list db-icon"></i>My Listing </a></li>
+                        <li><a href=""><i class="fa fa-plus-square db-icon"></i>Add listing</a></li>
+                        <li><a href=""><i class="fa fa-list-alt db-icon"></i>Pricing Plan</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <li class="nav-item active">
+          
+        <a class="nav-link" class="btn btn-success float-right" onclick="startDrawing()" href="#"> <i class="fa fa-plus mr-1"></i> Add New 
+          <span class="sr-only">(current)</span>
+          <select id="typepoint" onchange="getType()">
+            <option> -------- </option>
+            <option  value="Post"  style="background-color:rgb(247, 247, 158)">Post</option>
+            <option value="Market" style="background-color:rgb(245, 169, 150)">Market</option>
+            <option value="Ecole" style="background-color:rgb(170, 204, 243)">Ecole</option>
+            <option value="Pharmacie" style="background-color:rgb(158, 247, 166)">Pharmacie</option>
+          </select>
+        </a>
+      </li>        
+    <div class="main-container">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="dashboard-page-head">
+                        <div class="page-header">
+                            <h1>Vendor Dashboard</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="couple-board">
+                        <div id="map" style="width: 1500px; height: 600px">
+        
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="coming-soon-content text-center pinside80">
+                                    <h4>Comming Soon Features</h4>
+                                    <h1 class="text-mute">Stay tuned more to come</h1>
+                                    <a href="#" class="btn btn-primary">Thanks for wait</a> </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="footer">
+        <!-- Footer -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-5 ft-aboutus">
+                    <h2>Wedding.Vendor</h2>
+                    <p>At Wedding Vendor our purpose is to help people find great online network connecting wedding suppliers and wedding couples who use those suppliers. <a href="#">Start Find Vendor!</a></p>
+                    <a href="#" class="btn btn-default">Find a Vendor</a> </div>
+                <div class="col-md-3 ft-link">
+                    <h2>Useful links</h2>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact us</a></li>
+                        <li><a href="#">News</a></li>
+                        <li><a href="#">Career</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Use</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 newsletter">
+                    <h2>Subscribe for Newsletter</h2>
+                    <form>
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="Enter E-Mail Address" required>
+                            <span class="input-group-btn">
+            <button class="btn btn-default" type="button">Submit</button>
+            </span> </div>
+                        <!-- /input-group -->
+                        <!-- /.col-lg-6 -->
+                    </form>
+                    <div class="social-icon">
+                        <h2>Be Social &amp; Stay Connected</h2>
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook-square"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter-square"></i></a></li>
+                            <li><a href="#"><i class="fa fa-google-plus-square"></i></a></li>
+                            <li><a href="#"><i class="fa fa-instagram"></i></a></li>
+                            <li><a href="#"><i class="fa fa-flickr"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /.Footer -->
+    <div class="tiny-footer">
+        <!-- Tiny footer -->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">Copyright © 2014. All Rights Reserved</div>
+            </div>
+        </div>
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/bootstrap.min.js"></script>
+    <!-- Flex Nav Script -->
+    <script src="js/jquery.flexnav.js" type="text/javascript"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <script src="js/header-sticky.js"></script>
+    <script type="text/javascript" language="Javascript">
+        //supprimer point 
+        
+        // create map and add layers
+        const map = new ol.Map({
+              target: 'map',
+              layers: [
+                new ol.layer.Tile({
+                  source: new ol.source.OSM()
+                }),
+                
+              ],
+              view: new ol.View({
+              center:([1197816.006371,4138617.095339]),
+                zoom: 12
+              })
+            });
+        var drawSource= new ol.source.Vector({})
+        /*var elt = document.getElementById('caseACocher');
+                console.log(elt.checked)
+                console.log(elt.value)
+        var eltv=elt.value;
+        function addLayer(eltv) {
+            if (eltv == 'Post'){
+                 drawLayerPost.setVisible(true)
+                drawLayerMarket.setVisible(false)
+                drawLayerEcole.setVisible(false)
+               
+            }
+        
+        }*/
+        
+        $(window).on("load",function(){
+        
+            // get all
+            jQuery.get("/getAllPosts",function(data){ 
+              const features = []; 
+              console.log(data);
+              var colorpoint;
+              for (i = 0; i < data.length; i++){
+                    console.log("hello",data[i]);
+                    
+                        features.push(new ol.Feature({
+                             geometry: new ol.geom.Point([data[i].longitude, data[i].laltitude ])
+                        }));
+                    
+                    
+                    console.log(features);
+                    colorpoint=data[i].type;
+              }
+              const vectorSource = new ol.source.Vector({
+              features
+            });
+             if (colorpoint=="post"){
+               console.log("je suis post ")
+              }
+              else{
+                   console.log("je suis autre")
+               }
+            const vectorLayer = new ol.layer.Vector({
+              source: vectorSource,
+              style: new ol.style.Style({
+                  image: new ol.style.Circle({
+                    radius: 15,
+                    fill: new ol.style.Fill({color: 'yellow'})
+                  })
+              })
+            });
+            map.addLayer(vectorLayer);
+          
+         
+            
+              
+           })
+                    
+        })
+        //var typefilter=$(".CheckMarqueur:checked").val();
+        //var typefilter = document.querySelector('.CheckMarqueur:checked').value;
+        
+        //var checkedValue = null; 
+        //var checkedValue = document.getElementById('CheckMarqueur1:checked').value;
+        
+          
+        function filterMap(event){
+          //get post 
+          var mylayer; 
+          console.log(event)
+          
+             
+            jQuery.get("/getAllPosts",function(data){
+            var typefilter = event.target.defaultValue; 
+            
+            var colorfilter='red'
+           
+            if (typefilter=='Post'){
+               colorfilter ='yellow' ;
+            }
+            else if (typefilter=='Market'){
+              colorfilter ='red' ;
+            }
+            else if (typefilter=='Pharmacie'){
+              colorfilter ='green' ;
+            }
+            else if (typefilter=='Ecole'){
+              colorfilter ='blue' ;
+            }
+              const features = []; 
+              for (i = 0; i < data.length; i++){
+                    if (data[i].type == typefilter){
+                        features.push(new ol.Feature({
+                             geometry: new ol.geom.Point([data[i].longitude, data[i].laltitude ]),
+                             name: data[i].numero,
+                            population: 4000,
+                            rainfall: 500
+        
+                        }));
+                      
+                          }
+        
+              }
+              
+              const vectorSource = new ol.source.Vector({
+              features 
+            });
+            const vectorLayer = new ol.layer.Vector({
+              source: vectorSource,
+              style: new ol.style.Style({
+                  image: new ol.style.Circle({
+                    radius: 15,
+                    fill: new ol.style.Fill({color: colorfilter})
+                  })
+              })
+             
+            });
+            
+            if ( event.target.checked) {
+              
+              map.addLayer(vectorLayer);    
+          
+            } else {
+                
+                map.removeLayer(vectorLayer);
+                vectorLayer.setVisible(false);
+            }
+                 
+          })
+          
+          
+        }
+         var typeSelect = document.getElementById('typepoint');
+         var type = document.getElementById('type');
+        var draw = new ol.interaction.Draw({
+                    type : 'Point',
+                    source:drawSource,
+                    style: function(){
+                          if (typeSelect.value == 'Post'){
+                              return new ol.style.Style({
+                                      image :new ol.style.Circle({
+                                          fill: new ol.style.Fill({
+                                              color:'yellow'
+                                          }),
+                                          radius:7
+                                      })
+                                  })
+                          } 
+                      else if (typeSelect.value == 'Market'  ){
+                        
+                          return new ol.style.Style({
+                              image :new ol.style.Circle({
+                                  fill: new ol.style.Fill({
+                                      color:'red'
+                                  }),
+                                  
+                                  radius:7
+                              })
+                          })
+                        }  
+                        else if (typeSelect.value == 'Ecole'  ){
+                          return new ol.style.Style({
+                              image :new ol.style.Circle({
+                                  fill: new ol.style.Fill({
+                                      color:'blue'
+                                  }),
+                                  radius:7
+                              })
+                          })
+                        
+                      } 
+                      else {
+                          return new ol.style.Style({
+                              image :new ol.style.Circle({
+                                  fill: new ol.style.Fill({
+                                      color:'green'
+                                  }),
+                                  radius:7
+                              })
+                          }) 
+                      }
+                  }
+              
+            })
+            
+         function getType(){
+        
+          var x = document.getElementById("typepoint").value;
+          console.log("typepoint",x);
+          if (x == 'Post'){
+            
+            colordraw ='green' ;
+            console.log('mycolor is green')
+         }
+          else if (x == 'Market'){
+           colordraw ='red' ;
+           console.log('mycolor is red');
+         }
+         var drawLayerPost = new ol.layer.Vector({
+           source:drawSource,
+           style: function(){
+                 return new ol.style.Style({
+                         image :new ol.style.Circle({
+                             fill: new ol.style.Fill({
+                                 color:colordraw
+                             }),
+                             radius:7
+                         })
+                     })  
+          } 
+         });
+         map.addLayer(drawLayerPost);
+         
+          }
+          //vector Feature popup Logic
+          const overlayContainerElement=document.querySelector('.overlay-container');
+             const overlayLayer=new ol.Overlay({
+               element:overlayContainerElement
+             })
+             map.addOverlay(overlayLayer);
+             const overlayerA= document.getElementById('a');
+             const overlayerB= document.getElementById('b');
+             map.on ('click',function(e){
+               overlayLayer.setPosition(undefined);
+             map.forEachFeatureAtPixel(e.pixel,function(feature,layer){
+              overlayContainerElement.style.display ='block';
+               console.log(feature);
+               let c= e.coordinate
+               let a=e.coordinate[0];
+               let b=e.coordinate[1];
+               console.log(a,b);
+               overlayLayer.setPosition(c);
+               overlayerA.innerHTML= a;
+               overlayerA.innerHTML= b;
+             })
+           }) 
+           var btnClose = document.getElementById('btnClose');
+           btnClose.addEventListener('click',closeModal);
+           function closeModal() {
+            overlayContainerElement.style.display ='none';
+            }     
+        
+        
+        
+        
+          /*let popup;
+                        // Listen for clicks on the truck stops layer
+                        map.on('click', function (evt) {
+                            const popupLocation = evt.features[0].geometry.coordinates.slice([1197816.006371,4138617.095339]);
+                            const popupContent = `Name: <br />
+                                ID: <br />
+                                Set: `;
+        
+                            popup = new ol.Popup()
+                                .setLngLat(popupLocation)
+                                .setHTML(popupContent)
+                                .addTo(map);
+                        });*/
+           
+           /*var popup = new ol.Overlay({
+            element: document.getElementById('popup'),
+            });
+            map.addOverlay(popup);
+            map.on('click', function(evt) {
+            var prettyCoord = ol.coordinate.toStringHDMS(ol.proj.transform(evt.coordinate, 'EPSG:3857', 'EPSG:4326'), 2);
+            popup.show(evt.coordinate, '<div><h2>Coordinates</h2><p>' + prettyCoord + '</p></div>');
+        });*/
+        
+        
+           /* map.on('singleclick', function(evt) {
+            popup.hide();
+            popup.setOffset([0, 0]);
+        
+            // Attempt to find a feature in one of the visible vector layers
+            var feature = map.forEachFeatureAtPixel(evt.pixel, function(feature, layer) {
+            return feature;
+            });
+            if (feature) {
+                var coord = feature.getGeometry().getCoordinates();
+                var props = feature.getProperties();
+                var info =  "<input type='button' id='popup' value='Get here ?' />" ;
+                // Offset the popup so it points at the middle of the marker n
+                popup.setOffset([0, -22]);
+                  popup.show(coord, info);
+                  }   
+                });
+                $(document).on("click", "#popup", function(){
+                alert(nearest_feature(my_position)); 
+               });*/
+        
+        
+        
+           longitude = document.getElementById('longitude');
+           latElem = document.getElementById('laltitude');
+           longitude.value = '1197816.006371'; 
+           latElem.value = '4138617.095339';
+          //console.log(longitude);
+          //console.log(latElem);
+          
+          draw.on('drawend',function(evt){
+             
+              // alert('point is added')
+              clickedCoord = evt.feature.getGeometry().getFlatCoordinates() 
+              //$('#pointadding').modal('show');
+              console.log('clicked at', evt.feature.getGeometry().getFlatCoordinates()    )
+              /*map.removeInteraction(draw)*/
+               //console.log(draw.type)
+                 // let lat = clickedCoord[0];
+                  //let lng = clickedCoord[1];
+                console.log(clickedCoord[0]);
+                console.log(clickedCoord[1]);
+                // Update the values in the panel
+               
+                longitude.value = clickedCoord[0];
+                latElem.value = clickedCoord[1];
+                type.value=typeSelect.value;
+                //console.log(type.value);
+                
+                const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({  numero:5,
+                           type:typeSelect.value,
+                           laltitude: clickedCoord[1].toString(),
+                           longitude:  clickedCoord[0].toString()
+                          
+                          })
+                };
+                console.log(requestOptions.body);
+                fetch('/addPost', requestOptions)
+                .then(response => response.json());
+        
+              
+          })
+          
+          // Function that enables draw interaction
+          function startDrawing(){
+          // add interaction to the map
+            map.addInteraction(draw)
+           }
+          
+          </script>        
+</body>
+
+
+<!-- Mirrored from jituchauhan.com/wedding/wedding-new/dashboard-vendor.html by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 07 Jun 2021 22:34:40 GMT -->
+</html>
